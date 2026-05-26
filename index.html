@@ -101,31 +101,38 @@
             document.getElementById("myModal").style.display = "none";
         }
 
-        // Generator for Floating Hearts
-        function createHeart() {
-            const container = document.getElementById('heartsContainer');
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            
-            // Randomise horizontal position and size
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
-            
-            // Randomise floating speed duration
-            const duration = Math.random() * 3 + 3;
-            heart.style.animationDuration = duration + 's';
-            
-            container.appendChild(heart);
-            
-            // Remove old hearts from the document map once out of frame
-            setTimeout(() => {
-                heart.remove();
-            }, duration * 1000);
-        }
+        // Generator for Floating Hearts (Lag-Free Version)
+function createHeart() {
+    const container = document.getElementById('heartsContainer');
+    
+    // Cap the max number of hearts on screen to prevent lagging
+    if (container.children.length > 25) {
+        return; 
+    }
 
-        // Constantly spawn new hearts every 400 milliseconds
-        setInterval(createHeart, 400);
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerHTML = '❤️';
+    
+    // Randomise horizontal position and size
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = Math.random() * 15 + 10 + 'px'; // slightly smaller to run faster
+    
+    // Fast floating speed duration (between 2 to 4 seconds)
+    const duration = Math.random() * 2 + 2;
+    heart.style.animationDuration = duration + 's';
+    
+    container.appendChild(heart);
+    
+    // Immediately remove the heart once it floats out of view
+    setTimeout(() => {
+        heart.remove();
+    }, duration * 1000);
+}
+
+// Spawn a new heart every 800 milliseconds (half as frequent as before)
+setInterval(createHeart, 800);
+
     </script>
 </body>
 </html>
