@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Floating Hearts Container -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Hidden Audio Player -->
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music Control Button -->
+    <button id="musicBtn" onclick="startMusic()">🎵 Turn On Music 🎵</button>
+
+    <h1>Our Favourite Memories 📸</h1>
+    <p class="subtitle">Click on a photo to read my memory of that day.</p>
+
+    <!-- Photo Layout Grid (Add as many blocks as you want!) -->
+    <div class="gallery-grid">
+        <div class="gallery-item" onclick="openModal('images/photo1.jpg', 'The first time you came to my house')">
+            <img src="images/photo1.jpg" alt="Memory 1">
+        </div>
+        <div class="gallery-item" onclick="openModal('images/photo2.jpg', 'I love doing mundane tasks with you.')">
+            <img src="images/photo2.jpg" alt="Memory 2">
+        </div>
+        <div class="gallery-item" onclick="openModal('images/photo3.jpg', 'Our first event together!')">
+            <img src="images/photo3.jpg" alt="Memory 3">
+        </div>
+        <div class="gallery-item" onclick="openModal('images/photo4.jpg', 'My favourite person to be silly with.')">
+            <img src="images/photo4.jpg" alt="Memory 4">
+        </div>
+        <div class="gallery-item" onclick="openModal('images/photo5.jpg', 'We really just take pictures every second we can.')">
+            <img src="images/photo5.jpg" alt="Memory 5">
+        </div>
+        <div class="gallery-item" onclick="openModal('images/photo6.jpg', 'My favourite gossip buddy.')">
+            <img src="images/photo6.jpg" alt="Memory 6">
+        </div>
+        <div class="gallery-item" onclick="openModal('images/photo7.jpg', 'Uhmmmm yeahh.')">
+            <img src="images/photo7.jpg" alt="Memory 7">
+        </div>
+        <div class="gallery-item" onclick="openModal('images/photo8.jpg', 'you really just do sleep anywhere, anytime..')">
+            <img src="images/photo8.jpg" alt="Memory 8">
+        </div>
+        <div class="gallery-item" onclick="openModal('images/photo9.jpg', 'I love you.')">
+            <img src="images/photo9.jpg" alt="Memory 9">
+        </div>
+        <div class="gallery-item" onclick="openModal('images/photo10.jpg', 'Heres to many more outings and matching outfits')">
+            <img src="images/photo10.jpg" alt="Memory 10">
+        </div>
+        <div class="gallery-item" onclick="openModal('images/photo11.jpg', 'Just a random cute selfie.')">
+            <img src="images/photo11.jpg" alt="Memory 11">
+        </div>
+        <div class="gallery-item" onclick="openModal('images/photo12.jpg', 'Just a random cute selfie because I love your smile.')">
+            <img src="images/photo12.jpg" alt="Memory 12">
+        </div>
+        <div class="gallery-item" onclick="openModal('images/photo13.jpg', 'When im with you, everything stands still.')">
+            <img src="images/photo13.jpg" alt="Memory 13">
+        </div>
+        <div class="gallery-item" onclick="openModal('images/photo14.jpg', 'goofball.')">
+            <img src="images/photo14.jpg" alt="Memory 14">
+        </div>
+        <div class="gallery-item" onclick="openModal('images/photo15.jpg', 'Just a random cute selfie because I love your smile.')">
+            <img src="images/photo15.jpg" alt="Memory 15">
+        </div>
+        </div>
+
+    <!-- The Pop-Up Box (Modal) -->
+    <div id="myModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <img id="modalImg" src="" alt="Expanded View">
+            <p id="modalCaption"></p>
+        </div>
+    </div>
+
+    <!-- Scripting for Interactions -->
+    <script>
+        // Music Player Toggle
+        function startMusic() {
+            var audio = document.getElementById("bgMusic");
+            audio.play();
+            document.getElementById("musicBtn").style.display = "none";
+        }
+
+        // Expanded View Controls
+        function openModal(imgSrc, captionText) {
+            document.getElementById("myModal").style.display = "flex";
+            document.getElementById("modalImg").src = imgSrc;
+            document.getElementById("modalCaption").innerText = captionText;
+        }
+        
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        // Generator for Floating Hearts
+        function createHeart() {
+            const container = document.getElementById('heartsContainer');
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            
+            // Randomise horizontal position and size
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            
+            // Randomise floating speed duration
+            const duration = Math.random() * 3 + 3;
+            heart.style.animationDuration = duration + 's';
+            
+            container.appendChild(heart);
+            
+            // Remove old hearts from the document map once out of frame
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+
+        // Constantly spawn new hearts every 400 milliseconds
+        setInterval(createHeart, 400);
+    </script>
+</body>
+</html>
